@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>This is Sam I Am</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .text {
+      font-size: 3rem;
+      color: white;
+      text-align: center;
+      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+      }
+      to {
+        text-shadow: 0 0 20px #00f2ff, 0 0 40px #00f2ff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="text">this is sam i am</div>
+</body>
+</html>
