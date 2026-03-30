@@ -14,11 +14,12 @@
       font-family: Arial, sans-serif;
       color: white;
       overflow: hidden;
+      flex-direction: column;
     }
 
     .message {
       font-size: 3rem;
-      text-align: center;
+      margin-bottom: 20px;
       animation: float 3s ease-in-out infinite;
     }
 
@@ -27,7 +28,17 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Jumpscare screen */
+    button {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background: #00f2ff;
+      color: black;
+    }
+
+    /* Jumpscare */
     .jumpscare {
       position: fixed;
       top: 0;
@@ -39,21 +50,14 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      overflow: hidden;
-    }
-
-    .scare-content {
-      text-align: center;
-      font-size: 2.5rem;
-      color: black;
     }
 
     .guy {
       font-size: 5rem;
+      margin-top: 20px;
+      animation: slideIn 0.4s forwards;
       position: relative;
       left: -200%;
-      animation: slideIn 0.4s forwards;
-      margin-top: 20px;
     }
 
     @keyframes slideIn {
@@ -65,36 +69,39 @@
 </head>
 <body>
 
-  <div class="message">
-    this is sam i am
-  </div>
+  <div class="message">this is sam i am</div>
+
+  <button id="startBtn">Start</button>
 
   <div class="jumpscare" id="scare">
-    <div class="scare-content">
-      <div>I do not like them, Sam-I-Am!</div>
-      <div class="guy">😡</div>
-    </div>
+    <div>I do not like them, Sam-I-Am!</div>
+    <div class="guy">😡</div>
   </div>
 
-  <!-- Sound file (must be in same folder) -->
-  <audio id="scareSound" src="videoplayback" preload="auto"></audio>
+  <audio id="scareSound" src="videoplayback.mp3" preload="auto"></audio>
 
   <script>
-    // Random delay between 0.5s and 3s
-    const delay = Math.random() * 2500 + 500;
+    const startBtn = document.getElementById("startBtn");
+    const scare = document.getElementById("scare");
+    const audio = document.getElementById("scareSound");
 
-    setTimeout(() => {
-      const scare = document.getElementById("scare");
-      const audio = document.getElementById("scareSound");
+    startBtn.addEventListener("click", () => {
+      // Hide button after click
+      startBtn.style.display = "none";
 
-      scare.style.display = "flex";
+      // Random delay (0.5–3 sec)
+      const delay = Math.random() * 2500 + 500;
 
-      // Play sound
-      audio.play().catch(err => {
-        console.log("Autoplay blocked:", err);
-      });
+      setTimeout(() => {
+        scare.style.display = "flex";
 
-    }, delay);
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+          console.log("Audio blocked:", err);
+        });
+
+      }, delay);
+    });
   </script>
 
 </body>
