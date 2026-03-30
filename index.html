@@ -35,18 +35,31 @@
       width: 100%;
       height: 100%;
       background: red;
-      color: black;
       display: none;
       justify-content: center;
       align-items: center;
-      font-size: 3rem;
-      text-align: center;
       flex-direction: column;
+      overflow: hidden;
     }
 
-    .jumpscare img {
-      max-width: 300px;
+    .scare-content {
+      text-align: center;
+      font-size: 2.5rem;
+      color: black;
+    }
+
+    .guy {
+      font-size: 5rem;
+      position: relative;
+      left: -200%;
+      animation: slideIn 0.4s forwards;
       margin-top: 20px;
+    }
+
+    @keyframes slideIn {
+      to {
+        left: 0;
+      }
     }
   </style>
 </head>
@@ -57,21 +70,29 @@
   </div>
 
   <div class="jumpscare" id="scare">
-    <div>
-      I do not like them, Sam-I-Am!
+    <div class="scare-content">
+      <div>I do not like them, Sam-I-Am!</div>
+      <div class="guy">😡</div>
     </div>
   </div>
 
+  <!-- Sound file (must be in same folder) -->
+  <audio id="scareSound" src="videoplayback" preload="auto"></audio>
+
   <script>
-    // Random delay between 5 and 15 seconds
-    const delay = Math.random() * 10000 + 5000;
+    // Random delay between 0.5s and 3s
+    const delay = Math.random() * 2500 + 500;
 
     setTimeout(() => {
-      document.getElementById("scare").style.display = "flex";
+      const scare = document.getElementById("scare");
+      const audio = document.getElementById("scareSound");
 
-      // Optional: play a sound if you add one
-      // const audio = new Audio("sound.mp3");
-      // audio.play();
+      scare.style.display = "flex";
+
+      // Play sound
+      audio.play().catch(err => {
+        console.log("Autoplay blocked:", err);
+      });
 
     }, delay);
   </script>
