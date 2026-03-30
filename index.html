@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>This is Sam I Am</title>
+  <title>Sam I Am</title>
   <style>
     body {
       margin: 0;
@@ -10,34 +10,71 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: #0f2027;
       font-family: Arial, sans-serif;
+      color: white;
       overflow: hidden;
     }
 
-    .text {
+    .message {
       font-size: 3rem;
-      color: white;
       text-align: center;
-      animation: float 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
+      animation: float 3s ease-in-out infinite;
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+      50% { transform: translateY(-10px); }
     }
 
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
-      }
-      to {
-        text-shadow: 0 0 20px #00f2ff, 0 0 40px #00f2ff;
-      }
+    /* Jumpscare screen */
+    .jumpscare {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: red;
+      color: black;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      text-align: center;
+      flex-direction: column;
+    }
+
+    .jumpscare img {
+      max-width: 300px;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="text">this is sam i am</div>
+
+  <div class="message">
+    this is sam i am
+  </div>
+
+  <div class="jumpscare" id="scare">
+    <div>
+      I do not like them, Sam-I-Am!
+    </div>
+  </div>
+
+  <script>
+    // Random delay between 5 and 15 seconds
+    const delay = Math.random() * 10000 + 5000;
+
+    setTimeout(() => {
+      document.getElementById("scare").style.display = "flex";
+
+      // Optional: play a sound if you add one
+      // const audio = new Audio("sound.mp3");
+      // audio.play();
+
+    }, delay);
+  </script>
+
 </body>
 </html>
