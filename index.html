@@ -22,6 +22,11 @@
       cursor: pointer;
     }
 
+    #text {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
     #scare {
       position: fixed;
       top: 0;
@@ -39,11 +44,6 @@
       height: 100%;
       object-fit: cover;
     }
-
-    #text {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
   </style>
 </head>
 <body>
@@ -52,11 +52,9 @@
   <button id="startBtn">Start</button>
 
   <div id="scare">
-    <!-- Replace with your jumpscare image -->
-    <img src="jumpscare.jpg" alt="jumpscare">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUSExMVFhUWFhcaFxgXFxgXGBcaGBgXFxYYFxUYHSggGBolGxcXIjEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy8mICUtLS0tLS0wLS0tLS8tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/...">
   </div>
 
-  <!-- Sound file -->
   <audio id="scareSound" src="videoplayback.mp3" preload="auto"></audio>
 
   <script>
@@ -69,21 +67,20 @@
 
       // Unlock audio (required by browsers)
       try {
-        audio.volume = 1;
         await audio.play();
         audio.pause();
       } catch (e) {}
 
-      // Random delay between 0.5s and 3s
+      // Random delay: 0.5s to 3s
       const delay = Math.random() * 2500 + 500;
 
       setTimeout(() => {
+        // Show jumpscare
+        scare.style.display = "flex";
+
         // Play sound
         audio.currentTime = 0;
         audio.play().catch(() => {});
-
-        // Show jumpscare
-        scare.style.display = "flex";
       }, delay);
     });
   </script>
